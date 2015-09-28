@@ -7,7 +7,7 @@ public class Main {
 		Calculon c = new Calculon("Calculon");
 		c.setVisible(true);
 		c.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		c.setSize(200, 250);
+		c.setSize(210, 200);
 		c.setResizable(false);
 		c.setLocationRelativeTo(null);
 	}

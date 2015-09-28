@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class Calculon extends JFrame{
 	JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,b0,b_plus,b_minus,b_mult,b_div,b_change,b_equal,b_clear;
-	String inout_string, next_operation_type;
+	String inout_string, next_operation_type = "";
 	int first_num = 0;
 	int second_flag = 0;
 	JTextField inout;
@@ -56,8 +56,6 @@ public class Calculon extends JFrame{
 		b_div.addActionListener(handler);
 		b_mult.addActionListener(handler);
 		b_plus.addActionListener(handler);
-		b_equal.addActionListener(handler);
-		b_change.addActionListener(handler);
 		b_clear.addActionListener(handler);
 		
 	}
@@ -65,120 +63,80 @@ public class Calculon extends JFrame{
 	public class eHandler implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			// Pressed number key	
-			if (e.getSource() == b0) {
-				if (first_num != 0 && second_flag == 1 ) { 
+			// Pressed number key
+			
+			if ( e.getSource() == b0 || e.getSource() == b1 || e.getSource() == b2 || e.getSource() == b3 || e.getSource() == b4 || e.getSource() == b5 || e.getSource() == b6  || e.getSource() == b7  || e.getSource() == b8  || e.getSource() == b9  || e.getSource() == b0 ) {
+				if ( second_flag == 1 ) { 
 					inout.setText(null);
 					second_flag = 0;
-				}				
-				inout_string = inout.getText() + "0";
+				}
+				if (e.getSource() == b0) { inout_string = inout.getText() + "0"; }
+				if (e.getSource() == b1) { inout_string = inout.getText() + "1"; }
+				if (e.getSource() == b2) { inout_string = inout.getText() + "2"; }
+				if (e.getSource() == b3) { inout_string = inout.getText() + "3"; }
+				if (e.getSource() == b4) { inout_string = inout.getText() + "4"; }
+				if (e.getSource() == b5) { inout_string = inout.getText() + "5"; }
+				if (e.getSource() == b6) { inout_string = inout.getText() + "6"; }
+				if (e.getSource() == b7) { inout_string = inout.getText() + "7"; }
+				if (e.getSource() == b8) { inout_string = inout.getText() + "8"; }
+				if (e.getSource() == b9) { inout_string = inout.getText() + "9"; }
 				inout.setText(inout_string);
 			}
-			if (e.getSource() == b1) {
-				if (first_num != 0 && second_flag == 1 ) { 
-					inout.setText(null);
-					second_flag = 0;
-				}	
-				inout_string = inout.getText() + "1";
-				inout.setText(inout_string);
-			}
-			if (e.getSource() == b2) { 
-				if (first_num != 0 && second_flag == 1 ) { 
-					inout.setText(null);
-					second_flag = 0;
-				}	
-				inout_string = inout.getText() + "2";
-				inout.setText(inout_string);
-			}
-			if (e.getSource() == b3) {
-				if (first_num != 0 && second_flag == 1 ) { 
-					inout.setText(null);
-					second_flag = 0;
-				}	
-				inout_string = inout.getText() + "3";
-				inout.setText(inout_string);
-			}
-			if (e.getSource() == b4) {
-				if (first_num != 0 && second_flag == 1 ) { 
-					inout.setText(null);
-					second_flag = 0;
-				}	
-				inout_string = inout.getText() + "4";
-				inout.setText(inout_string);
-			}
-			if (e.getSource() == b5) {
-				if (first_num != 0 && second_flag == 1 ) { 
-					inout.setText(null);
-					second_flag = 0;
-				}	
-				inout_string = inout.getText() + "5";
-				inout.setText(inout_string);
-			}
-			if (e.getSource() == b6) {
-				if (first_num != 0 && second_flag == 1 ) { 
-					inout.setText(null);
-					second_flag = 0;
-				}	
-				inout_string = inout.getText() + "6";
-				inout.setText(inout_string);
-			}
-			if (e.getSource() == b7) {
-				if (first_num != 0 && second_flag == 1 ) { 
-					inout.setText(null);
-					second_flag = 0;
-				}	
-				inout_string = inout.getText() + "7";
-				inout.setText(inout_string);
-			}
-			if (e.getSource() == b8) {
-				if (first_num != 0 && second_flag == 1 ) { 
-					inout.setText(null);
-					second_flag = 0;
-				}	
-				inout_string = inout.getText() + "8";
-				inout.setText(inout_string);
-			}
-			if (e.getSource() == b9) {
-				if (first_num != 0 && second_flag == 1 ) { 
-					inout.setText(null);
-					second_flag = 0;
-				}	
-				inout_string = inout.getText() + "9";
-				inout.setText(inout_string);
-			}
-			//
-			// Pressed plus button
-			//
+
+			// Pressed operand button
 			// next_operation_type
 			// first_num - last operand
 			// inout_string - inputed operand
 			if ((e.getSource() == b_plus || e.getSource() == b_minus || e.getSource() == b_div || e.getSource() == b_mult || e.getSource() == b_equal) && inout.getText() != null) {
 				inout_string = inout.getText();
+				
+				System.out.println("next_operation_type: " + next_operation_type);
+				if (next_operation_type != "") {
+					//System.out.println("calculate, first_num: " + first_num + "inout_string: " + inout_string);
+					//Mathem m = new Mathem();
+					//first_num = m.oper(next_operation_type, first_num, inout_string);
+					
+					if (next_operation_type == "PLUS") { first_num = first_num + Integer.parseInt(inout_string); }
+					if (next_operation_type == "MINUS") { first_num = first_num - Integer.parseInt(inout_string); }
+					if (next_operation_type == "MULT") { first_num = first_num * Integer.parseInt(inout_string); }
+					if (next_operation_type == "DIV") { first_num = first_num / Integer.parseInt(inout_string); }
+					inout.setText(Integer.toString(first_num));
+				} else {
+					first_num = Integer.parseInt(inout_string);
+				}
+					
+				//JOptionPane.showMessageDialog(null, next_operation_type + " " + first_num + " " + inout_string);
+				
 				second_flag = 1;
-				Mathem m = new Mathem();
-				first_num = m.oper(next_operation_type, first_num, inout_string);
 				
 				if (e.getSource() == b_plus) { next_operation_type = "PLUS"; }
 				if (e.getSource() == b_minus) { next_operation_type = "MINUS"; }
 				if (e.getSource() == b_div) { next_operation_type = "DIV"; }
 				if (e.getSource() == b_mult) { next_operation_type = "MULT"; }
 				
-				inout.setText(Integer.toString(first_num));		
-				if (e.getSource() == b_equal) { next_operation_type = ""; first_num = 0; second_flag = 0; }
-				
+				if (e.getSource() == b_equal) { 
+					//System.out.println("B_EQUAL case. first_num = " + first_num + " clear all");
+					next_operation_type = ""; first_num = 0; //second_flag = 0; 
+				}
 			}
+			
+			
 			if (e.getSource() == b_change && inout.getText() != null) {
-				inout_string = inout.getText();
-				Mathem m = new Mathem();
-				inout.setText(Integer.toString(m.oper("CHNG", first_num, inout_string)));
+				
+				//inout_string = inout.getText();
+				//first_num = Integer.parseInt(inout_string);
+				
+				inout.setText(Integer.toString(-Integer.parseInt(inout.getText())));
+				
+				System.out.println("chagne");
+				//first_num *= -first_num;
+				//second_flag = 1;
 			}
 			if (e.getSource() == b_clear) {
 				inout.setText("");
 				first_num = 0;
 				second_flag = 0;
 			}
-			
-			
 		}
 	}
 }
